@@ -1,6 +1,9 @@
 import 'package:fic9_ecommerce_template_app/common/constants/images.dart';
+import 'package:fic9_ecommerce_template_app/data/models/requests/login_request_model.dart';
+import 'package:fic9_ecommerce_template_app/presentation/auth/bloc/login/login_bloc.dart';
 import 'package:fic9_ecommerce_template_app/presentation/home/dashboard_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../common/components/button.dart';
 import '../../common/components/custom_text_field.dart';
@@ -16,12 +19,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final usernameController = TextEditingController();
+  final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
   @override
   void dispose() {
-    usernameController.dispose();
+    emailController.dispose();
     passwordController.dispose();
     super.dispose();
   }
@@ -43,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
           const SpaceHeight(24.0),
           const Center(
             child: Text(
-              "FIC 9",
+              "Abon Bali",
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
@@ -64,8 +67,8 @@ class _LoginPageState extends State<LoginPage> {
           ),
           const SpaceHeight(40.0),
           CustomTextField(
-            controller: usernameController,
-            label: 'Username',
+            controller: emailController,
+            label: 'Email',
           ),
           const SpaceHeight(12.0),
           CustomTextField(
@@ -74,16 +77,44 @@ class _LoginPageState extends State<LoginPage> {
             obscureText: true,
           ),
           const SpaceHeight(24.0),
-          Button.filled(
-            onPressed: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const DashboardPage(),
-                ),
+          BlocConsumer<LoginBloc, LoginState>(
+            listener: (context, state) {
+              state.maybeWhen(
+                  orElse: () {},
+                  success: (data) {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const DashboardPage(),
+                      ),
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Login berhasil'),
+                        backgroundColor: Colors.green,
+                      ),
+                    );
+                  },
+                  error: (error) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(error),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                  });
+            },
+            builder: (context, state) {
+              return Button.filled(
+                onPressed: () {
+                  final data = LoginRequestModel(
+                      identifier: emailController.text,
+                      password: passwordController.text);
+                  context.read<LoginBloc>().add(LoginEvent.login(data));
+                },
+                label: 'Masuk',
               );
             },
-            label: 'Masuk',
           ),
           const SpaceHeight(122.0),
           Center(
