@@ -1,12 +1,13 @@
+import 'package:fic9_ecommerce_template_app/common/constants/variables.dart';
+import 'package:fic9_ecommerce_template_app/common/extensions/int_ext.dart';
+import 'package:fic9_ecommerce_template_app/data/models/responses/products_response_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../common/components/space_height.dart';
 import '../../../common/constants/colors.dart';
-import '../product_model.dart';
-
 
 class ProductCard extends StatelessWidget {
-  final ProductModel data;
+  final Product data;
   const ProductCard({super.key, required this.data});
 
   @override
@@ -33,8 +34,8 @@ class ProductCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.asset(
-              data.images.first,
+            Image.network(
+              '${Variables.baseUrl}${data.attributes.image.data.first.attributes.url}',
               width: 170.0,
               height: 112.0,
               fit: BoxFit.cover,
@@ -42,7 +43,7 @@ class ProductCard extends StatelessWidget {
             const SpaceHeight(14.0),
             Flexible(
               child: Text(
-                data.name,
+                data.attributes.name,
                 style: const TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
@@ -51,7 +52,7 @@ class ProductCard extends StatelessWidget {
             ),
             const SpaceHeight(4.0),
             Text(
-              data.priceFormat,
+              data.attributes.price.currencyFormatRp,
               style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w600,

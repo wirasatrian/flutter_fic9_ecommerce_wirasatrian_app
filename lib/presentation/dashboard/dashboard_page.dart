@@ -1,4 +1,5 @@
 import 'package:fic9_ecommerce_template_app/common/constants/images.dart';
+import 'package:fic9_ecommerce_template_app/presentation/account/account_page.dart';
 import 'package:fic9_ecommerce_template_app/presentation/home/home_page.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,7 @@ class _DashboardPageState extends State<DashboardPage> {
       child: Text('Explore Page'),
     ),
     const Center(child: Text('Cart Page')),
-    const Center(child: Text('Account Page')),
+    const AccountPage(),
   ];
 
   void _onItemTapped(int index) {

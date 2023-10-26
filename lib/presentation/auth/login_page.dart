@@ -1,7 +1,8 @@
 import 'package:fic9_ecommerce_template_app/common/constants/images.dart';
+import 'package:fic9_ecommerce_template_app/data/datasources/auth_local_datasource.dart';
 import 'package:fic9_ecommerce_template_app/data/models/requests/login_request_model.dart';
 import 'package:fic9_ecommerce_template_app/presentation/auth/bloc/login/login_bloc.dart';
-import 'package:fic9_ecommerce_template_app/presentation/home/dashboard_page.dart';
+import 'package:fic9_ecommerce_template_app/presentation/dashboard/dashboard_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -82,6 +83,7 @@ class _LoginPageState extends State<LoginPage> {
               state.maybeWhen(
                   orElse: () {},
                   success: (data) {
+                    AuthLocalDatasource().saveAuthData(data);
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(

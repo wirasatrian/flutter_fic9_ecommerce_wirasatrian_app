@@ -1,5 +1,7 @@
 import 'package:fic9_ecommerce_template_app/common/constants/images.dart';
+import 'package:fic9_ecommerce_template_app/presentation/home/bloc/products/products_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../common/components/search_input.dart';
 import '../../common/components/space_height.dart';
@@ -189,18 +191,32 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           const SpaceHeight(8.0),
-          GridView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 10.0,
-              mainAxisSpacing: 55.0,
-            ),
-            itemCount: products.length,
-            itemBuilder: (context, index) => ProductCard(
-              data: products[index],
-            ),
+          BlocBuilder<ProductsBloc, ProductsState>(
+            builder: (context, state) {
+              return state.maybeWhen(
+                orElse: () {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                },
+                loaded: (model) {
+                  return GridView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 10.0,
+                      mainAxisSpacing: 55.0,
+                    ),
+                    itemCount: model.data.length,
+                    itemBuilder: (context, index) => ProductCard(
+                      data: model.data[index],
+                    ),
+                  );
+                },
+              );
+            },
           ),
         ],
       ),
