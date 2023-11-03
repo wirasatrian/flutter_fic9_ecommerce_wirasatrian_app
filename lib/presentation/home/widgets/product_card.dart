@@ -1,6 +1,7 @@
 import 'package:fic9_ecommerce_template_app/common/constants/variables.dart';
 import 'package:fic9_ecommerce_template_app/common/extensions/int_ext.dart';
 import 'package:fic9_ecommerce_template_app/data/models/responses/products_response_model.dart';
+import 'package:fic9_ecommerce_template_app/presentation/product_detail/product_detail.dart';
 import 'package:flutter/material.dart';
 
 import '../../../common/components/space_height.dart';
@@ -14,10 +15,13 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(builder: (context) => const ProductDetailPage()),
-        // );
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => ProductDetailPage(
+                    product: data,
+                  )),
+        );
       },
       child: Container(
         decoration: BoxDecoration(

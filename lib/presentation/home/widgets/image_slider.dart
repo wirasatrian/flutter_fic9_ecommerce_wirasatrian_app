@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
@@ -6,7 +7,12 @@ import '../../../common/constants/colors.dart';
 
 class ImageSlider extends StatefulWidget {
   final List<String> items;
-  const ImageSlider({super.key, required this.items});
+  final bool isAsset;
+  const ImageSlider({
+    Key? key,
+    required this.items,
+    this.isAsset = true,
+  }) : super(key: key);
 
   @override
   State<ImageSlider> createState() => _ImageSliderState();
@@ -21,14 +27,23 @@ class _ImageSliderState extends State<ImageSlider> {
     return Column(
       children: [
         CarouselSlider(
-          items: widget.items
-              .map((e) => Image.asset(
-                    e,
-                    height: 206.0,
-                    width: MediaQuery.of(context).size.width,
-                    fit: BoxFit.cover,
-                  ))
-              .toList(),
+          items: widget.isAsset
+              ? widget.items
+                  .map((e) => Image.asset(
+                        e,
+                        height: 206.0,
+                        width: MediaQuery.of(context).size.width,
+                        fit: BoxFit.cover,
+                      ))
+                  .toList()
+              : widget.items
+                  .map((e) => Image.network(
+                        e,
+                        height: 206.0,
+                        width: MediaQuery.of(context).size.width,
+                        fit: BoxFit.cover,
+                      ))
+                  .toList(),
           carouselController: _controller,
           options: CarouselOptions(
             autoPlay: true,

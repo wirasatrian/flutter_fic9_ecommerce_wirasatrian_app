@@ -1,4 +1,7 @@
+import 'package:badges/badges.dart' as badges;
 import 'package:fic9_ecommerce_template_app/common/constants/images.dart';
+import 'package:fic9_ecommerce_template_app/presentation/cart/bloc/cart/cart_bloc.dart';
+import 'package:fic9_ecommerce_template_app/presentation/cart/cart_page.dart';
 import 'package:fic9_ecommerce_template_app/presentation/home/bloc/products/products_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -104,18 +107,49 @@ class _HomePageState extends State<HomePage> {
               const Spacer(),
               Row(
                 children: [
-                  IconButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SizedBox()),
+                  badges.Badge(
+                    position: badges.BadgePosition.topEnd(top: -2, end: 2),
+                    badgeContent: BlocBuilder<CartBloc, CartState>(
+                      builder: (context, state) {
+                        return state.maybeWhen(
+                          orElse: () {
+                            return const Text(
+                              '0',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            );
+                          },
+                          loaded: (carts) {
+                            int totalQuantity = 0;
+
+                            for (var cart in carts) {
+                              totalQuantity += cart.quantity;
+                            }
+
+                            return Text(
+                              totalQuantity.toString(),
+                              style: const TextStyle(
+                                color: Colors.white,
+                              ),
+                            );
+                          },
                         );
                       },
-                      icon: Image.asset(
-                        Images.iconBuy,
-                        height: 24.0,
-                      )),
+                    ),
+                    child: IconButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const CartPage()),
+                          );
+                        },
+                        icon: Image.asset(
+                          Images.iconBuy,
+                          height: 24.0,
+                        )),
+                  ),
                   IconButton(
                       onPressed: () {
                         Navigator.push(
