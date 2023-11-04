@@ -27,7 +27,7 @@ class Data {
   final int totalPrice;
   final String deliveryAddress;
   final String courierName;
-  final int shippingCost;
+  final int courierCost;
   final String statusOrder;
 
   Data({
@@ -35,7 +35,7 @@ class Data {
     required this.totalPrice,
     required this.deliveryAddress,
     required this.courierName,
-    required this.shippingCost,
+    required this.courierCost,
     required this.statusOrder,
   });
 
@@ -48,7 +48,7 @@ class Data {
         totalPrice: json["totalPrice"],
         deliveryAddress: json["deliveryAddress"],
         courierName: json["courierName"],
-        shippingCost: json["shippingCost"],
+        courierCost: json["courierCost"],
         statusOrder: json["statusOrder"],
       );
 
@@ -57,7 +57,7 @@ class Data {
         "totalPrice": totalPrice,
         "deliveryAddress": deliveryAddress,
         "courierName": courierName,
-        "shippingCost": shippingCost,
+        "courierCost": courierCost,
         "statusOrder": statusOrder,
       };
 }
