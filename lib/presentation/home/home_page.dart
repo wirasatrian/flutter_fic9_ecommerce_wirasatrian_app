@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../common/components/search_input.dart';
-import '../../common/components/space_height.dart';
+import '../../common/components/spaces.dart';
 import '../../common/constants/colors.dart';
 import 'product_model.dart';
 import 'widgets/category_button.dart';

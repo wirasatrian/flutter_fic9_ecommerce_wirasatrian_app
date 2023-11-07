@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:fic9_ecommerce_template_app/common/components/button.dart';
-import 'package:fic9_ecommerce_template_app/common/components/space_height.dart';
+import 'package:fic9_ecommerce_template_app/common/components/spaces.dart';
 import 'package:fic9_ecommerce_template_app/common/constants/colors.dart';
 import 'package:fic9_ecommerce_template_app/common/constants/images.dart'
     as localImage;
@@ -94,9 +94,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       );
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const CartPage(),
-                    ),
+                    MaterialPageRoute(builder: (context) => const CartPage()),
                   );
                 },
                 label: "Add to Cart",

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../constants/colors.dart';
-import 'space_height.dart';
+import 'spaces.dart';
 
 
 enum ButtonStyle { filled, outlined }

@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../common/components/button.dart';
 import '../../common/components/custom_text_field.dart';
-import '../../common/components/space_height.dart';
+import '../../common/components/spaces.dart';
 import '../../common/constants/colors.dart';
 import 'register_page.dart';
 

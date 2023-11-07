@@ -4,7 +4,7 @@ import 'package:fic9_ecommerce_template_app/data/models/responses/products_respo
 import 'package:fic9_ecommerce_template_app/presentation/product_detail/product_detail.dart';
 import 'package:flutter/material.dart';
 
-import '../../../common/components/space_height.dart';
+import '../../../common/components/spaces.dart';
 import '../../../common/constants/colors.dart';
 
 class ProductCard extends StatelessWidget {
